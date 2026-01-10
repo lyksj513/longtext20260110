@@ -30,7 +30,7 @@ def main():
     # >>> 新增：启动时先弹出提示框 <<<
     messagebox.showinfo(
         "提示",
-        "该程序由lovelytcateman/www.52pojie.cn免费分享，请选择需要合并文档所在的文件夹"
+        "该程序由lovelycateman/www.52pojie.cn免费分享，请选择需要合并文档所在的文件夹"
     )
 
     # 选择文件夹
@@ -110,3 +110,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
