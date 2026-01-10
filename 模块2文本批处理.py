@@ -27,7 +27,7 @@ class ConfigWindow:
     """配置窗口 - 用于设置API参数和测试连接"""
     def __init__(self, root):
         self.root = root
-        self.root.title("大模型API配置")
+        self.root.title("大模型API配置-作者lovelycateman/www.52pojie.cn")
         self.root.geometry("650x550")
         self.root.resizable(False, False)
         
@@ -236,7 +236,7 @@ class MainApplication:
     def __init__(self, config):
         self.config = config
         self.root = tk.Tk()
-        self.root.title("智能提示词处理器")
+        self.root.title("智能提示词处理器-作者lovelycateman/www.52pojie.cn")
         self.root.geometry("1000x850")  # 增加宽度
         self.root.minsize(900, 700)
         
