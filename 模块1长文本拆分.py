@@ -319,7 +319,7 @@ def split_text_file_v2(file_path: str, output_folder: str, base_name: str, max_t
 class UnifiedSplitGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("文本分块工具 - 请选择模式")
+        self.root.title("文本分块工具 -作者lovelycateman/www.52pojie.cn")
         self.root.geometry("520x460")  # 增加高度以容纳两行信息
         self.root.resizable(False, False)
 
