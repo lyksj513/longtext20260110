@@ -1,7 +1,7 @@
 import os
 import re
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, messagebox  # 新增 messagebox
 from collections import defaultdict
 import platform
 
@@ -14,26 +14,11 @@ def extract_info(filename):
       - BBB 可以是任意字符（包括空），但整个文件名必须以 .txt 结尾
     返回 (prefix, n) 或 None（不匹配则返回 None）
     """
-    # 正则解释：
-    # ^(.*?) -> 非贪婪匹配前缀 AAA
-    # _chunk_ -> 固定字符串
-    # (\d+) -> 捕获数字 N
-    # (.*?) -> 非贪婪匹配 BBB（可能为空）
-    # \.txt$ -> 以 .txt 结尾
     pattern = r'^(.*?)_chunk_(\d+)(.*?)\.txt$'
     match = re.match(pattern, filename)
     if match:
         prefix = match.group(1)
         n = int(match.group(2))
-        # 注意：我们不再使用 BBB，只关心 prefix 和 n
-        # 但为了区分不同组，应把 AAA + BBB 作为整体前缀？还是仅 AAA？
-        # 根据你的描述“AAA 和 BBB 可以是任何内容”，但合并逻辑应基于“同一原始文件拆分”
-        # 通常，AAA 是主名，BBB 是附加标识（如时间戳），但若 BBB 不同，可能属于不同批次
-        #
-        # 然而你要求“所有名字为 AAA_chunk_NBBB.txt 的文件汇总”，
-        # 并未说明是否按 AAA 分组。但从原逻辑看，应按“相同 AAA”分组合并。
-        #
-        # 所以我们只用 AAA 作为分组依据（即 group_key = AAA）
         return prefix, n
     return None
 
@@ -41,6 +26,12 @@ def main():
     # 创建隐藏的主窗口
     root = tk.Tk()
     root.withdraw()  # 隐藏主窗口
+
+    # >>> 新增：启动时先弹出提示框 <<<
+    messagebox.showinfo(
+        "提示",
+        "该程序由lovelytcateman/www.52pojie.cn免费分享，请选择需要合并文档所在的文件夹"
+    )
 
     # 选择文件夹
     folder_path = filedialog.askdirectory(title="请选择包含处理后txt文件的文件夹")
@@ -105,7 +96,7 @@ def main():
 
     print("处理完成！")
 
-    # >>> 新增：自动打开结果所在文件夹（跨平台）<<<
+    # 自动打开结果所在文件夹（跨平台）
     try:
         system = platform.system()
         if system == "Windows":
